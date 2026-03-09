@@ -12,6 +12,9 @@ class Config:
     SECRET_KEY = os.environ.get(
         "S_KEY", "super_secret_session_key"
     )
-    ADMIN_KEY = os.environ.get(
-        "A_KEY", "my_admin_key"
+    WKN1_KEY = os.environ.get(
+        "WKN1_KEY", "WeLoveKyachra"
+    )
+    WKN2_KEY=os.environ.get(
+        "WKN2_KEY", "IsNotWeLoveKyachra"
     )

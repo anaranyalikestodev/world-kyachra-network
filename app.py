@@ -1,5 +1,5 @@
 from flask import Flask, redirect, url_for,render_template
-from routes.notice_routes import notice_bp
+from routes.wkn1.notice_routes import notice_bp
 from routes.auth_routes import auth_bp
 from config import Config
 from extensions import db, migrate, bcrypt, api, cors

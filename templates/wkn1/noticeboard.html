@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<!-- Container to center content and add spacing -->
+<div class="container mt-5">
+  <!-- Button to create new notice -->
+  <a href="{{ url_for('notice_bp.create_notice') }}">
+    <button class="btn btn-primary mb-4">Create New Notice</button>
+  </a>
+
+  <!-- Section for notices -->
+  <hr />
+  <h2>Previously Issued Notices</h2>
+
+  <!-- Loop through each notice and display it -->
+  {% for notice in notices %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ notice.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        Issued: At {{ notice.issued_at.strftime('%Y-%m-%d %H:%M') }} By
+        {{notice.issued_by}}
+      </h6>
+      <p class="card-text">{{ notice.content|safe }}</p>
+
+      <span>
+        <a
+          href="{{ url_for('notice_bp.edit', id=notice.id) }}"
+          class="btn btn-warning btn-sm"
+          >Edit</a
+        >
+
+        <form
+          action="{{ url_for('notice_bp.delete_notice', id=notice.id) }}"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+      </span>
+    </div>
+  </div>
+  {% endfor %}
+
+  <hr />
+
+  <div class="container my-5">
+    <h1 class="display-5 fw-bold mb-4">
+      Release Notes <i class="fs-5 text-muted">0.0 (25/2.26)</i>
+      <span class="badge bg-warning text-dark">intentional</span>
+    </h1>
+
+    <p class="lead">
+      TBH this is more of a personal learning project. The things I said about
+      taking Kyachra to a global level may be possible only if others support.
+      However, I will maintain this for some time, which can increase if even
+      some of you viewing this, help take Kyachra to a global level by sparing 9
+      minutes 15 seconds to 15 minutes 9 seconds each day. DM me to know how you
+      can contribute (either technically or non-technically or both).
+    </p>
+
+    <hr class="my-4" />
+
+    <h2 class="h4 mb-3">Upcoming Features for Versions 0.x</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Improved UI</li>
+      <li class="list-group-item">More Pages</li>
+      <li class="list-group-item">Content Properly Structured in Sections</li>
+      <li class="list-group-item">Cleaner Display of Errors</li>
+      <li class="list-group-item">
+        Authentication to Prevent Wrongful Deletion/Edition/Creation of Notices
+      </li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

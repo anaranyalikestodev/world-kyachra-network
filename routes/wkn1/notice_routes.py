@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from models.notice import db, Notice
-from flask_login import current_user
 from flask import abort,request,jsonify,session
+
+from models.wkn1.notice import db, Notice
+from flask_login import current_user
 
 notice_bp = Blueprint("notice_bp", __name__, template_folder="templates")
 
@@ -14,7 +15,7 @@ def protect_notices():
 @notice_bp.route("/")
 def index():
     notices = Notice.query.order_by(Notice.issued_at.desc()).all()
-    return render_template("index.html", notices=notices, title="House of Kyachra")
+    return render_template("wkn1/noticeboard.html", notices=notices, title="House of Kyachra")
 
 # CREATE
 @notice_bp.route("/create", methods=["GET", "POST"])
@@ -27,7 +28,7 @@ def create_notice():
         if not title or not content or not issued_by:
             flash("Fields cannot be empty", "danger")
             return render_template(
-                "cu.html",
+                "wkn1/cu.html",
                 title="Create Notice",
                 title_value=title,
                 content_value=content,issued_by=issued_by
@@ -40,14 +41,14 @@ def create_notice():
         flash("Notice created successfully!", "success")
         return redirect(url_for("notice_bp.index"))
 
-    return render_template("cu.html", title="Create Notice")
+    return render_template("wkn1/cu.html", title="Create Notice")
 
 # EDIT
 @notice_bp.route("/edit/<int:id>", methods=["GET"])
 def edit(id):
     notice = Notice.query.get_or_404(id)
     return render_template(
-        "cu.html",
+        "wkn1/cu.html",
         title="Edit Notice",
         notice=notice
     )
@@ -63,7 +64,7 @@ def update_notice(id):
     if not title or not content:
         flash("Fields cannot be empty", "danger")
         return render_template(
-            "cu.html",
+            "wkn1/cu.html",
             title="Edit Notice",
             notice=notice
         )
