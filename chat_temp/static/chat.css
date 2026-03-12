@@ -1,0 +1,25 @@
+#chatbox{
+height:320px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.message{
+max-width:70%;
+padding:8px 12px;
+border-radius:16px;
+font-size:14px;
+}
+
+.self{
+background:#0d6efd;
+color:white;
+align-self:flex-end;
+}
+
+.other{
+background:#e9ecef;
+align-self:flex-start;
+}

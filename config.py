@@ -13,8 +13,11 @@ class Config:
         "S_KEY", "super_secret_session_key"
     )
     WKN1_KEY = os.environ.get(
-        "WKN1_KEY", "WeLoveKyachra"
+        "WKN1_KEY", "WeVeryMuchLoveKyachra"
     )
     WKN2_KEY=os.environ.get(
         "WKN2_KEY", "IsNotWeLoveKyachra"
+    )
+    TEMP_KEY=os.environ.get(
+        "TEMP_KEY", "EverythingIsTemporary"
     )
